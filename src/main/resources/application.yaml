@@ -2,7 +2,8 @@ spring:
   application:
     name: spring-boot-aws-rds
   datasource:
-    url: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
+   # url: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
+    jdbcUrl: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: admin
     password: mysqlubqroot
