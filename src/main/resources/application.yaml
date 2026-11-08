@@ -2,11 +2,19 @@ spring:
   application:
     name: spring-boot-aws-rds
   datasource:
+    write:
    # url: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
-    jdbcUrl: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: admin
-    password: mysqlubqroot
+      jdbcUrl: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: admin
+      password: mysqlubqroot
+
+    read:
+      # url: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
+      jdbcUrl: jdbc:mysql://database-1-read-replica.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: admin
+      password: mysqlubqroot
 
 logging:
   level:
