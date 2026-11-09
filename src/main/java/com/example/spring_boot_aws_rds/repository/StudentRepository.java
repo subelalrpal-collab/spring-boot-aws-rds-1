@@ -14,10 +14,11 @@ import java.util.List;
 public class StudentRepository  {
 
     @Autowired
+    @Qualifier("writeJdbcTemplate")
     private JdbcTemplate writeJdbcTemplate;
 
     @Autowired
-    @Qualifier("getReadReplicaJdbcTemplate")
+    @Qualifier("readJdbcTemplate")
     private JdbcTemplate readReplicaJdbcTemplate;
 
     public List<Student> getAllStudents(){

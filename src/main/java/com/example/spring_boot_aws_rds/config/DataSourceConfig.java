@@ -1,3 +1,4 @@
+/*
 package com.example.spring_boot_aws_rds.config;
 
 import com.zaxxer.hikari.HikariDataSource;
@@ -17,24 +18,47 @@ import javax.sql.DataSource;
 public class DataSourceConfig {
 
     @Bean(name="writeDataSourceProperties")
+   // @Bean
     @Primary
     @ConfigurationProperties("spring.datasource.write")
-    public DataSource writeDataSourceProperties(){
-        return new HikariDataSource();
+    public DataSourceProperties  writeDataSourceProperties(){
+        return new DataSourceProperties();
     }
+
+    @Bean(name="writeDataSource")
+    @Primary
+    @ConfigurationProperties("spring.datasource.write.hikari")
+   public HikariDataSource writeDataSource(@Qualifier("writeDataSourceProperties") DataSourceProperties sourceProperties){
+     return sourceProperties.initializeDataSourceBuilder()
+             .type(HikariDataSource.class)
+             .build();
+    }
+
     @Bean(name="getWriteJdbcTemplate")
     @Primary
-    public JdbcTemplate getWriteJdbcTemplate( @Qualifier("writeDataSourceProperties") DataSource dataSource){
+    public JdbcTemplate getWriteJdbcTemplate( @Qualifier("writeDataSource") HikariDataSource dataSource){
         return new JdbcTemplate(dataSource);
     }
 
-    @Bean(name="readReplicaDataSource")
+   // @Bean(name="readReplicaDataSource")
+    @Bean
     @ConfigurationProperties("spring.datasource.read")
-    public DataSource readReplicaDataSource(){
-        return new HikariDataSource();
+    public DataSourceProperties readDataSourceProperties(){
+        System.out.println("This is Read Data Source");
+        return new DataSourceProperties();
+    }
+
+    @Bean(name="readReplicaDataSource")
+    @ConfigurationProperties("spring.datasource.read.hikari")
+    public HikariDataSource readReplicaDataSource( @Qualifier("readDataSourceProperties") DataSourceProperties properties){
+        return properties.initializeDataSourceBuilder()
+                .type(HikariDataSource.class)
+                .build();
     }
     @Bean(name="getReadReplicaJdbcTemplate")
-    public JdbcTemplate getReadReplicaJdbcTemplate( @Qualifier("readReplicaDataSource") DataSource dataSource){
+    public JdbcTemplate getReadReplicaJdbcTemplate( @Qualifier("readReplicaDataSource") HikariDataSource dataSource){
+        System.out.println("This is Read JDBC TEmplate");
         return new JdbcTemplate(dataSource);
     }
 }
+*/

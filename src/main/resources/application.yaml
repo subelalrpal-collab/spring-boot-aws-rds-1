@@ -4,6 +4,7 @@ spring:
   datasource:
     write:
    # url: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
+     # jdbcUrl: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
       jdbcUrl: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: admin
@@ -11,10 +12,21 @@ spring:
 
     read:
       # url: jdbc:mysql://database-1.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
+      #jdbcUrl: jdbc:mysql://database-1-read-replica.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
       jdbcUrl: jdbc:mysql://database-1-read-replica.c5wo6wu84ktu.ap-south-1.rds.amazonaws.com:3306/my_student_db
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: admin
       password: mysqlubqroot
+
+    write.hikari:
+      pool-name: WriteHikariPool
+      maximum-pool-size: 10
+      minimum-idle: 2
+
+    read.hikari:
+      pool-name: ReadHikariPool
+      maximum-pool-size: 10
+      minimum-idle: 2
 
 logging:
   level:
